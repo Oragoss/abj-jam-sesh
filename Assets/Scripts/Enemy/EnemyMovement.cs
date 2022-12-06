@@ -8,11 +8,13 @@ namespace Assets.Scripts.Enemy
     public class EnemyMovement : MonoBehaviour
     {
         [SerializeField] int speed;
-        
+
         //TODO: Only find the player through trigger
         [SerializeField] GameObject player;
 
         Rigidbody2D rigidbody;
+
+        bool canMove;
 
         private void Start()
         {
@@ -24,7 +26,8 @@ namespace Assets.Scripts.Enemy
         {
             //Try https://docs.unity3d.com/ScriptReference/Vector2.MoveTowards.html
             //Try https://gamedev.stackexchange.com/questions/112105/enemy-moving-towards-player-in-a-2d-setting
-            rigidbody.velocity = new Vector2(-player.transform.position.x * speed * Time.deltaTime, rigidbody.velocity.y);
+            if (canMove)
+                rigidbody.velocity = new Vector2(-player.transform.position.x * speed * Time.deltaTime, rigidbody.velocity.y);
 
 
             //Tried this one: https://forum.unity.com/threads/moving-an-enemy-charactercontroller-toward-player.1146479/
@@ -36,9 +39,17 @@ namespace Assets.Scripts.Enemy
             //}
         }
 
-        private void OnTriggerStay2D(Collider2D collision)
+        private void OnTriggerEnter2D(Collider2D collider)
         {
-            
+            if (collider.gameObject.CompareTag("Player"))
+            {
+                canMove = true;
+            }
+        }
+
+        private void OnTriggerStay2D(Collider2D collider)
+        {
+
         }
     }
 }

@@ -13,6 +13,7 @@ namespace Assets.Scripts.Player
         [SerializeField] float meleeAttackCooldown = 0.5f;
         [SerializeField] int meleeDamage = 5;
         [SerializeField] int health = 25;
+        [SerializeField] Text healthText;
 
         CapsuleCollider2D attackCollider;
         EnemyCombat enemy;
@@ -25,6 +26,17 @@ namespace Assets.Scripts.Player
             attackCollider = gameObject.AddComponent<CapsuleCollider2D>();
             attackCollider.size = new Vector2(5f, 5f);
             attackCollider.isTrigger = true;
+        }
+
+        private void Update()
+        {
+            healthText.text = "Health: " + health;
+
+            if (health <= 0)
+            {
+                healthText.text = "DEAD: X";
+                healthText.GetComponent<Text>().color = Color.red;
+            }
         }
 
         private void FixedUpdate()
