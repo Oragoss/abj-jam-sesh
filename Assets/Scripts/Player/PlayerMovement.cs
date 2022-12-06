@@ -10,7 +10,6 @@ namespace Assets.Scripts.Player
         [SerializeField] private float jumpPower = 5.0f;
         [SerializeField] LayerMask groundLayer;
         BoxCollider2D playerCollider;
-        bool grounded;
 
         private Rigidbody2D _playerRigidbody;
 
@@ -45,7 +44,7 @@ namespace Assets.Scripts.Player
         /// <returns></returns>
         private bool IsGrounded()
         {
-            grounded = Physics2D.OverlapCircle(playerCollider.transform.position, 1, groundLayer);
+            bool grounded = Physics2D.OverlapCircle(playerCollider.transform.position, 1, groundLayer);
             return grounded;
         }
     }
