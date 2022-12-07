@@ -8,6 +8,7 @@ namespace Assets.Scripts.Enemy
     {
         [SerializeField] int health = 10;
         [SerializeField] int attackDamage = 5;
+        [SerializeField] int detectionRadius = 15;
 
         CircleCollider2D detectCollider;
         PlayerCombat player;
@@ -16,7 +17,7 @@ namespace Assets.Scripts.Enemy
         void Awake()
         {
             detectCollider = gameObject.AddComponent<CircleCollider2D>();
-            detectCollider.radius = 15;
+            detectCollider.radius = detectionRadius;
             detectCollider.isTrigger = true;
         }
 
